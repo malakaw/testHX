@@ -28,6 +28,17 @@ def getApis(fname):
 def getAssert(fname):
     return getValues(fname , 2)
 
+def getHeaders(fname):
+    return getValues(fname , 3)
+
+def getVal(fname):
+    return getValues(fname , 4)
+
+
 if __name__ == "__main__":
-    print getApis("/Users/wengxiaojun/work/redstar/python/testHX/case/c1/c1.xlsx")
-    print getParams("/Users/wengxiaojun/work/redstar/python/testHX/case/c1/c1.xlsx")
+#    print getApis("/Users/wengxiaojun/work/redstar/python/testHX/case/c1/c1.xlsx")
+    print getVal("/Users/wengxiaojun/work/redstar/python/github_hx/testHX/case/c2/c2.xlsx")
+    val_ = getVal("/Users/wengxiaojun/work/redstar/python/github_hx/testHX/case/c2/c2.xlsx")
+    print val_[0][1]
+    eval(val_[0][1])
+    #eval(compile(val_[0][1], '', 'eval'))
