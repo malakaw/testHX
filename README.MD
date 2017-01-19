@@ -11,11 +11,11 @@ testHX 是一个python2.7写的简单测试restful接口的通用工具，可以
 安装pip
 
 步骤三
-｀｀｀
+```
 pip install requests
 pip install pyhtml
 pip install xlrd
-｀｀｀
+```
 
 步骤四
  git clone https://github.com/malakaw/testHX.git
