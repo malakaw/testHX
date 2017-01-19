@@ -50,4 +50,22 @@ result是存放执行后的结果文件，都是html,action/acc.py执行完自�
 ```    
 if __name__ == "__main__":
     action(3,True)
+
 ```
+参数3就是 case3 的意思，调用的是 case/c3/c3.excel配置文件;
+参数True就是打印出页面显示的意思，默认都要打开
+
+
+
+
+## 配置文件 .excel ##
+这个里面有几个工作表
+
+### 工作表1-apis ###
+请求的 api
+### 工作表1-params ###
+请求 api需要传的参数
+### 工作表1-assert ###
+请求api对应的断言
+### 工作表1-header ###
+请求 api需要传的headers
