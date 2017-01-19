@@ -21,8 +21,8 @@ pip install xlrd
 # 使用 #
 
 ## 1）文件目录 ##
-
-├── README.txt
+`
+├── README.MD
 ├── action
 │   ├── acc.py
 ├── case
@@ -41,7 +41,7 @@ pip install xlrd
 │   ├── requestUtil.pyc
 │   └── result_case1.html
 └── result
-
+`
 action/acc.py 是启动执行文件
 case目录是存放case的配置目录，都是excel文件
 result是存放执行后的结果文件，都是html,action/acc.py执行完自动打开
