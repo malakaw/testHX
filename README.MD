@@ -17,9 +17,6 @@ pip install pyhtml
 pip install xlrd
 ```
 
-步骤四
- git clone https://github.com/malakaw/testHX.git
-
 
 # 使用 #
 
