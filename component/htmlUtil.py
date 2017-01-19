@@ -24,4 +24,3 @@ def writeHtml(c_number , resultAssert):
     
 if __name__ == "__main__":
     print ""
-

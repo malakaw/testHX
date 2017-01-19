@@ -4,23 +4,19 @@ import webbrowser
 import json
 import requests
 import os
+
 import sys
 sys.path.append("..")
 import component.excelUtil   as excU
 import component.requestUtil as req
 import component.htmlUtil    as htmU
+import component.common      as comm
 excelFilePath_ = "../case/c%s/c%s.xlsx"
 
 def assertR(api_url , result , assert_val):
     is_ok = u"☺"
-#    print "--------"
-#    print result
-#    print assert_val
-#    print type(assert_val)
     for k , v in assert_val.items():
-        print result[k] , "get result ", type(result[k])
-        print assert_val[k] , "assert value" ,type(assert_val[k])
-        if str(result[k]) != str(assert_val[k]):
+        if str(comm.getFromDict(result,k)).lower() != str(assert_val[k]).lower():
             is_ok = u"☠☠☠☠"
     return is_ok
 
@@ -60,7 +56,7 @@ def handleAPI(c_number,apis , params , asserts , headers):
 
         api_number    = api[0].split("_")[1]
         paramstr_     = "param_%s_"  % api_number
-        assert_       = "assert_%s"  % api_number
+        assert_       = "assert_%s_"  % api_number
         header_       = "header_%s_" % api_number
         api_url       = api[1]
         api_method    = api[2]
@@ -81,9 +77,11 @@ def handleAPI(c_number,apis , params , asserts , headers):
             result = req.getRsponse(api_url , api_params , api_content,api_headers, requests.post)
         else:
             result = req.getRsponse(api_url , api_params , api_content,api_headers,requests.get)
-        print result    
-        assert_ok = assertR(api_url , result , api_assert)
+        print result
+        print api_assert
         result_utf8 = json.dumps(result,indent=1,ensure_ascii=False).encode('utf8')
+        assert_ok = assertR(api_url , result_utf8 , api_assert)
+
 #        print unicode(result_utf8,"utf-8")
         result_info.append([api_url,assert_ok,unicode(result_utf8,"utf-8")])
     return htmU.writeHtml(c_number,result_info)
