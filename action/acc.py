@@ -16,14 +16,15 @@ excelFilePath_ = "../case/c%s/c%s.xlsx"
 def assertR(api_url , result , assert_val):
     is_ok = u"☺"
     for k , v in assert_val.items():
-        if str(comm.getFromDict(result,k)).lower() != str(assert_val[k]).lower():
+        temp = str(comm.getFromDict(result,k)).lower()
+        if "error--get-assert" in temp or temp != str(assert_val[k]).lower():
             is_ok = u"☠☠☠☠"
+            
     return is_ok
 
 def getParams(params,api_number):
     api_params    = None
     paramstr_     = "param_%s_"  % api_number
-    print "--->"
     print api_number
     print params
     api_params = {}
@@ -43,6 +44,7 @@ def getParams(params,api_number):
 
 def handleAPI(c_number,apis , params , asserts , headers):
     result_info = []
+    result_dict = {}
     for api in apis:
         print api
         print api[0]
@@ -65,14 +67,13 @@ def handleAPI(c_number,apis , params , asserts , headers):
         api_params = getParams(params,api_number)
         for h in headers:
             if header_ in h[0]:
-                api_headers[h[1]] = h[2] 
-
+                api_headers[h[1]] = comm.getHeader(h[1],h[2],result_dict) 
+        print asserts
         for asser in asserts:
             asser = filter(lambda x: len(str(x).strip()) > 0, asser)
             if len(asser) > 0 :
                 if assert_ in asser[0]:
                     api_assert[asser[1]] = asser[2]
-                    
         if "post" in api_method:
             result = req.getRsponse(api_url , api_params , api_content,api_headers, requests.post)
         else:
@@ -80,9 +81,8 @@ def handleAPI(c_number,apis , params , asserts , headers):
         print result
         print api_assert
         result_utf8 = json.dumps(result,indent=1,ensure_ascii=False).encode('utf8')
+        result_dict[str(api_number)] = result
         assert_ok = assertR(api_url , result_utf8 , api_assert)
-
-#        print unicode(result_utf8,"utf-8")
         result_info.append([api_url,assert_ok,unicode(result_utf8,"utf-8")])
     return htmU.writeHtml(c_number,result_info)
 
@@ -99,4 +99,4 @@ def action(c_number , openHtml = False):
 
     
 if __name__ == "__main__":
-    action(3,True)
+    action(2,True)
