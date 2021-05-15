@@ -1,4 +1,4 @@
-testHX  1 是一个python2.7写的简单测试restful接口的通用工具，可以在excel中配置请求的接口／参数／断言，断言现在只支持“等于”，执行完后直接写入html,然后打开;现在只支持response是json格式的数据。
+testHX  33 1 是一个python2.7写的简单测试restful接口的通用工具，可以在excel中配置请求的接口／参数／断言，断言现在只支持“等于”，执行完后直接写入html,然后打开;现在只支持response是json格式的数据。
 请求method支持 POST/GET
 
 # 准备工作 #
